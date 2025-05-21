@@ -10,6 +10,7 @@ class VectorIterator
 public:
 	using Ptr = T*;
 	using Ref = T&;
+	using Offset = std::ptrdiff_t;
 
 public:
 	VectorIterator(Ptr ptr);
@@ -19,6 +20,9 @@ public:
 
 	VectorIterator<T>& operator--();
 	VectorIterator<T> operator--(int);
+
+	VectorIterator<T>& operator+=(Offset offset);
+	VectorIterator<T>& operator-=(Offset offset);
 
 	NODISCARD Ref operator[](size_t index) noexcept;
 	NODISCARD Ptr operator->() noexcept;
@@ -67,6 +71,20 @@ inline VectorIterator<T> VectorIterator<T>::operator--(int)
 }
 
 template<typename T>
+inline VectorIterator<T>& VectorIterator<T>::operator+=(Offset offset)
+{
+	ptr += offset;
+	return *this;
+}
+
+template<typename T>
+inline VectorIterator<T>& VectorIterator<T>::operator-=(Offset offset)
+{
+	ptr -= offset;
+	return *this;
+}
+
+template<typename T>
 NODISCARD inline T& VectorIterator<T>::operator[](size_t index) noexcept
 {
 	return *(ptr + index);
@@ -104,6 +122,7 @@ class ConstVectorIterator
 public:
 	using ConstPtr = const T*;
 	using ConstRef = const T&;
+	using Offset = std::ptrdiff_t;
 
 public:
 	ConstVectorIterator(ConstPtr ptr);
@@ -113,6 +132,9 @@ public:
 
 	ConstVectorIterator<T>& operator--();
 	ConstVectorIterator<T> operator--(int);
+
+	ConstVectorIterator<T>& operator+=(Offset offset);
+	ConstVectorIterator<T>& operator-=(Offset offset);
 
 	NODISCARD ConstRef operator[](size_t index) const noexcept;
 	NODISCARD ConstPtr operator->() const noexcept;
@@ -158,6 +180,20 @@ inline ConstVectorIterator<T> ConstVectorIterator<T>::operator--(int)
 	ConstVectorIterator toReturn = *this;
 	--(*this);
 	return toReturn;
+}
+
+template<typename T>
+inline ConstVectorIterator<T>& ConstVectorIterator<T>::operator+=(Offset offset)
+{
+	ptr += offset;
+	return *this;
+}
+
+template<typename T>
+inline ConstVectorIterator<T>& ConstVectorIterator<T>::operator-=(Offset offset)
+{
+	ptr -= offset;
+	return *this;
 }
 
 template<typename T>
