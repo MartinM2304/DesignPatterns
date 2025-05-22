@@ -3,6 +3,8 @@ public:
 	virtual void work() = 0;
 	virtual void rest() = 0;
 	virtual void eat() = 0;
+	
+	virtual ~Worker()=default;
 };
 
 class HumanWorker :public Worker {

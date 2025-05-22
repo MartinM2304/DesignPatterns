@@ -18,7 +18,7 @@ class FileSerializer{
 	
 	virtual void write(const char*data)const =0;
 	
-	virtual ~FileSerializer();
+	virtual ~FileSerializer()=default;
 };
 
 class TXTFileSerializer:public FileSerializer{
@@ -69,11 +69,11 @@ class Application{
 	{}
 	
 	
-	void writeData() const{
+	void save() const{
         serializer->write(data.c_str());
     }
 
-    void readData() {
+    void read() {
         data = serializer->read();
     }
 
@@ -86,11 +86,11 @@ TXTFileSerializer txtSerializer("example.txt");
 
     // Inject them into Application (Application does not own them)
     Application appTxt(&txtSerializer);
-    appTxt.writeData();
-    appTxt.readData(100);
+    appTxt.save();
+    appTxt.read(100);
 
     Application appBin(&binSerializer);
-    appBin.writeData();
-    appBin.readData(100);
+    appBin.save();
+    appBin.read(100);
 
 }
