@@ -15,6 +15,27 @@
 
 ### Factory
 
+- Статична функция, обвита в клас, която на база някакъв аргумент/и, връща инстанция на даден клас
+- Генерално създаване на обекти;
+
+**Пример:**
+
+```c++
+class Factory
+{
+public:
+	static Base* baseFactory(...);
+}
+
+Base* Factory::baseFactory(...)
+{
+	// ...
+}
+
+// Извикване
+Base* ptr = Factory::baseFactory(...);
+```
+
 ### Singleton
 
 - Осигуряваме само една инстанция на даден клас, към която има глобален достъп
@@ -50,9 +71,55 @@ static Singleton& getInstance()
 
 - Създаване на копие на обекти, без да се интересуваме от техния тип - **clone()**
 
+**Пример:**
+
+```c++
+struct Base
+{
+public:
+	virtual Base* clone() const = 0;
+	virtual ~Base() noexcept = default;
+}
+
+struct Der : Base
+{
+public:
+	virtual Base* clone() const override;
+}
+
+Base* Der::clone() const
+{
+	return new Der(*this);
+}
+```
+
 ## Behavioural Design Patterns
 
 ### Command
+
+- Програма, която получава заявки
+
+```console
+> create <...>
+> find <...>
+> print <...>
+```
+
+```plaintext
+									Command
+							virtual execute() = 0;
+				/						|							\
+		CreateCommand				FindCommand					PrintCommand
+	execute() override;			execute() override;			execute() override;
+```
+
+```c++
+while (true)
+{
+	Command* current = CommandFactory::commandFactory(...);
+	current->execute();
+}
+```
 
 ### Iterator
 
@@ -100,7 +167,6 @@ bool search(const T* arr, const T& elem)
 
 - Взаимно разпознаванеи взаимодействие на обекти от полиморфна йерархия, без да се чупи абстракцията
 
-
 ### Strategy
 
 ## Structural Design Patterns
@@ -114,11 +180,37 @@ bool search(const T* arr, const T& elem)
 
 # SOLID
 
+5 принципа, които улесняват разработката на софтуера
+
 ## Single Responsibility Principle
+
+- Класът трябва да отговаря само за една основна задача
+
+**Пример:** E-Commerce
+
+```c++
+class Basket
+{
+	add();
+	remove();
+	// ...
+	pay(); // Количката не отговаря за механизмите, по които се извършва плащане
+}
+```
+
+![SRP](assets/srp.webp)
 
 ## Open-closed Principle
 
+- Разширяване без необходимост от промяна
+- Полиморфизъм
+
+![OCP](assets/ocp.webp])
+
 ## Liskov Substitution Principle
+
+- Лисков е жена!!!
+- Детето трябва да се държи като родителя си, без да променя параметри на връщане, липсващи функции, exception safety
 
 ## Interface Segregation Principle
 
