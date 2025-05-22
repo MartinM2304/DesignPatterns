@@ -1,6 +1,5 @@
 #include "StringPool.h"
 
-#include "StringPool.h"
 #include <iostream>
 #include <stdexcept>
 #include <cstring>
@@ -43,6 +42,14 @@ void StringPool::print() const
 	for (size_t i = 0; i < nodes.getSize(); i++)
 	{
 		std::cout << nodes[i].data << " " << nodes[i].refCount << std::endl;
+	}
+}
+
+StringPool::~StringPool() noexcept
+{
+	for (size_t i = 0; i < this->nodes.getSize(); i++)
+	{
+		delete[] this->nodes[i].data;
 	}
 }
 
@@ -103,6 +110,7 @@ void StringPool::remove(size_t idx)
 		throw std::out_of_range("Invalid remove index!");
 	}
 
+	delete[] this->nodes[idx].data;
 	nodes.remove(idx);
 }
 

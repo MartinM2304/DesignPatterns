@@ -33,4 +33,6 @@ public:
 	void removeString(const char* str);
 
 	void print() const;
+
+	~StringPool() noexcept;
 };
