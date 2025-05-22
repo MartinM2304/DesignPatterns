@@ -48,7 +48,7 @@ static Singleton& getInstance()
 
 ### Prototype
 
-- Съзадаване на копие на обекти, без да се интересуваме от техния тип - **clone()**
+- Създаване на копие на обекти, без да се интересуваме от техния тип - **clone()**
 
 ## Behavioural Design Patterns
 
