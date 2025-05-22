@@ -16,7 +16,9 @@ class FileSerializer{
 	
 	virtual std::string read(char*data) const = 0;
 	
-	virtual void write(const char*data) =0;
+	virtual void write(const char*data)const =0;
+	
+	virtual ~FileSerializer();
 };
 
 class TXTFileSerializer:public FileSerializer{
@@ -32,7 +34,7 @@ class TXTFileSerializer:public FileSerializer{
 		return readData;
 	}
 	
-	void write( const char*data)override{
+	void write( const char*data)const override{
 		std::ofstream ofs(fileName); 
 		//...
 	}
@@ -48,7 +50,7 @@ public:
         //...
     }
 
-    void write(const char* data) override {
+    void write(const char* data) const override {
         std::ofstream ofs(fileName, std::ios::binary);
         //...
     }
@@ -67,7 +69,7 @@ class Application{
 	{}
 	
 	
-	void writeData() {
+	void writeData() const{
         serializer->write(data.c_str());
     }
 
