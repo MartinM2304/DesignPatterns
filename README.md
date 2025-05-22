@@ -106,10 +106,10 @@ Base* Der::clone() const
 ```
 
 ```plaintext
-									Command
-							virtual execute() = 0;
-				/						|							\
-		CreateCommand				FindCommand					PrintCommand
+							Command
+						virtual execute() = 0;
+		/					|					\
+	CreateCommand				FindCommand				PrintCommand
 	execute() override;			execute() override;			execute() override;
 ```
 
@@ -202,10 +202,10 @@ class Basket
 
 ## Open-closed Principle
 
-- Разширяване без необходимост от промяна
+- Обектите трябва да са отворени за разширение, но затворени за промяна
 - Полиморфизъм
 
-![OCP](assets/ocp.webp])
+![OCP](assets/ocp.webp)
 
 ## Liskov Substitution Principle
 
