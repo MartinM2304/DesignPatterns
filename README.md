@@ -42,7 +42,7 @@ class Employee
 ако една малка промяна в кода ни кара да пренаписваме голяма част от него, 
 то тогава архитектурата на системата ни има голям проблем.
 
-![OCP](assets/ocp.jpg)
+![OCP](assets/ocp.png)
 
 ## Liskov Substitution Principle
 
