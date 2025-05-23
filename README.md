@@ -1,3 +1,61 @@
+# SOLID
+
+SOLID принципите ни казват как да подреждаме методи и структурите от данни в класовете си,
+и как тези класове трябва да бъдат свързани.
+
+Целите на SOLID са да направят кода ни:
+- Лесен за промяна.
+- Лесен за разбиране 
+
+
+## Single Responsibility Principle
+
+- Класът трябва да има само 1 причина да се променя.
+
+**Пример:** E-Commerce
+
+```c++
+class Employee
+{
+	save();
+	reportHours();
+	// ...
+	calculatePay(); 
+	// Класът не спазва SRP, защото има повече от 1 причина да се променя
+	// тук методът calculatePay ще се използва от HR екипът за заплатите
+	// методът reportHours ще се използва от мениджърите на служителя
+	// save ще се отнася до адиминстраторската част на компанията
+	
+	// Имайки 3те метода, класът Employee е свързан и с 3те отдела
+	// И така това може да накара част от действията на адиминстраторския екип
+	// да промени нещо което HR екипът ползва.
+}
+```
+
+![SRP](assets/srp.webp)
+
+## Open-closed Principle
+
+Обектите трябва да са отворени за разширение, но затворени за промяна,
+с други думи: Поведението на един обект трябва да може да се разширява, 
+без да е нужно да променяме самия обект. Това е най-важния принцип, защото
+ако една малка промяна в кода ни кара да пренаписваме голяма част от него, 
+то тогава архитектурата на системата ни има голям проблем.
+
+![OCP](assets/ocp.webp)
+
+## Liskov Substitution Principle
+
+![OCP](assets/lsp.jpg)
+
+## Interface Segregation Principle
+
+![OCP](assets/isp.jpg)
+
+## Dependency Inversion Principle
+
+![OCP](assets/dip.jpg)
+
 # Design Patterns
 
 Дизайн патърните се разделят на 3 основни вида:
@@ -99,27 +157,7 @@ Base* Der::clone() const
 
 - Програма, която получава заявки
 
-```console
-> create <...>
-> find <...>
-> print <...>
-```
 
-```plaintext
-							Command
-						virtual execute() = 0;
-		/					|					\
-	CreateCommand				FindCommand				PrintCommand
-	execute() override;			execute() override;			execute() override;
-```
-
-```c++
-while (true)
-{
-	Command* current = CommandFactory::commandFactory(...);
-	current->execute();
-}
-```
 
 ### Iterator
 
@@ -177,41 +215,3 @@ bool search(const T* arr, const T& elem)
 - Подобрява бързодействието, ако създаването на обекти е тежка операция
 - Обектите са **immutable**!
 - Реализация: **хеш / дърво**
-
-# SOLID
-
-5 принципа, които улесняват разработката на софтуера
-
-## Single Responsibility Principle
-
-- Класът трябва да отговаря само за една основна задача
-
-**Пример:** E-Commerce
-
-```c++
-class Basket
-{
-	add();
-	remove();
-	// ...
-	pay(); // Количката не отговаря за механизмите, по които се извършва плащане
-}
-```
-
-![SRP](assets/srp.webp)
-
-## Open-closed Principle
-
-- Обектите трябва да са отворени за разширение, но затворени за промяна
-- Полиморфизъм
-
-![OCP](assets/ocp.webp)
-
-## Liskov Substitution Principle
-
-- Лисков е жена!!!
-- Детето трябва да се държи като родителя си, без да променя параметри на връщане, липсващи функции, exception safety
-
-## Interface Segregation Principle
-
-## Dependency Inversion Principle
