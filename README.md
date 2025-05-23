@@ -32,7 +32,7 @@ class Employee
 }
 ```
 
-![SRP](assets/srp.webp)
+![SRP](assets/srp.jpg)
 
 ## Open-closed Principle
 
@@ -42,7 +42,7 @@ class Employee
 ако една малка промяна в кода ни кара да пренаписваме голяма част от него, 
 то тогава архитектурата на системата ни има голям проблем.
 
-![OCP](assets/ocp.webp)
+![OCP](assets/ocp.jpg)
 
 ## Liskov Substitution Principle
 
