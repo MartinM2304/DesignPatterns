@@ -4,7 +4,7 @@
 class Command
 {
 public:
-	virtual void execute(const std::string& text) = 0;
+	virtual void execute(std::string& text) = 0;
 	virtual ~Command() = default;
 };
 

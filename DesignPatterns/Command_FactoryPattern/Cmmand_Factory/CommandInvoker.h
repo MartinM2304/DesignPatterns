@@ -13,7 +13,7 @@ public:
 	CommandInvoker(CommandFactory* factory):commandFactory(factory) {
 
 	}
-	void execute(const std::string& commandString,const std::string& text) {
+	void execute(const std::string& commandString,std::string& text) {
 		Command* cmd = commandFactory->getCommand(commandString);
 		cmd->execute(text);
 	}
